@@ -52,7 +52,7 @@ fi
 echo ""
 echo ""
 echo "======================================================================="
-echo "| Older versions of Docker were called docker, docker.io, or docker-engine."
+echo "| Older versions of Ansible were called ansible."
 echo "| If these are installed or all conflicting packages, uninstall them."
 echo "======================================================================="
 echo ""
@@ -61,21 +61,21 @@ sleep 2
 # linux remove command for pms
 if [ "$lpms" == "apk" ]
 then
-	sudo apk del docker podman-docker
+	sudo apk del ansible
 elif [ "$lpms" == "dnf" ]
 then
-	sudo dnf remove docker docker-client docker-client-latest docker-common docker-latest docker-latest-logrotate docker-logrotate docker-selinux docker-engine-selinux docker-engine
+	sudo dnf remove ansible
 elif [ "$lpms" == "yum" ]
 then
-	sudo yum remove docker docker-client docker-client-latest docker-common docker-latest docker-latest-logrotate docker-logrotate docker-engine podman runc
+	sudo yum remove ansible
 elif [ "$lpms" == "apt" ]
 then
-	for pkg in docker docker-engine docker.io docker-doc docker-compose docker-compose-v2 podman-docker containerd runc; do sudo apt remove $pkg; done
+	for pkg in ansible; do sudo apt remove $pkg; done
 elif [ "$lpms" == "zypper" ]
 then
 	if [[ $(grep -Pow 'ID=\K[^;]*' /etc/os-release | tr -d '"') == *"sles"* ]]
 	then
-		sudo zypper remove docker docker-client docker-client-latest docker-common docker-latest docker-latest-logrotate docker-logrotate docker-engine runc
+		sudo zypper remove ansible
 	fi
 else
 	echo ""
@@ -89,21 +89,21 @@ echo "Done ✓"
 echo "======================================================================="
 
 ##########
-# Install Docker
+# Install Ansible
 ##########
 echo ""
 echo ""
 echo "======================================================================="
-echo "| Install Docker..."
+echo "| Install Ansible..."
 echo "======================================================================="
 echo ""
 sleep 2
 
 if [ "$lpms" == "apk" ]
 then
-	sudo apk add --update docker openrc bind-tools
-	sudo rc-update add docker boot
-	sudo service docker start
+	sudo apk add --update ansible
+	sudo rc-update add ansible boot
+	sudo service ansible start
 elif [ "$lpms" == "dnf" ]
 then
 	sudo dnf -y install dnf-plugins-core
